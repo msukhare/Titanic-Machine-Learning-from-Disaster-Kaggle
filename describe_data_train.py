@@ -6,13 +6,14 @@
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/19 13:08:56 by msukhare          #+#    #+#              #
-#    Updated: 2018/10/25 17:30:39 by msukhare         ###   ########.fr        #
+#    Updated: 2018/10/26 17:44:38 by msukhare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from read_and_complete_data import read_file
 import sys
 
@@ -48,11 +49,21 @@ def histo_data_train(data):
     plt.show()
 
 def main():
-    data = read_file(1)
+    data , old_data = read_file(1)
     #for i in range(int(data.shape[0])):
         #if (pd.notna(data['Cabin'][i])):
             #print(data['Cabin'][i], data['Ticket'][i], data['Fare'][i])
     histo_data_train(data)
+    old_data = old_data.drop(['PassengerId'], axis=1)
+    data = data.drop(['PassengerId'], axis=1)
+    tmp = old_data.head(890)
+    tmp = tmp.corr()
+    sns.heatmap(tmp, xticklabels=tmp.columns.values, yticklabels=tmp.columns.values)
+    plt.show()
+    tmp = data.head(890)
+    tmp = tmp.corr()
+    sns.heatmap(tmp, xticklabels=tmp.columns.values, yticklabels=tmp.columns.values)
+    plt.show()
 
 if (__name__ == "__main__"):
     main()
