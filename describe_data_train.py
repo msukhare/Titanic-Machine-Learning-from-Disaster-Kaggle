@@ -6,7 +6,7 @@
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/19 13:08:56 by msukhare          #+#    #+#              #
-#    Updated: 2018/10/26 17:44:38 by msukhare         ###   ########.fr        #
+#    Updated: 2018/10/27 14:58:02 by kemar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ def get_tab_split(cols_data, Y):
     return (yes, no)
 
 def histo_data_train(data):
-    nb_cols = 2
-    nb_fig = 5
+    nb_cols = 3
+    nb_fig = 6
     fig, axs = plt.subplots(nb_cols, nb_fig, figsize=(7, 7))
     i = 0
     j = 0
@@ -49,18 +49,16 @@ def histo_data_train(data):
     plt.show()
 
 def main():
-    data , old_data = read_file(1)
+    data_train, old_data = read_file(1)
     #for i in range(int(data.shape[0])):
         #if (pd.notna(data['Cabin'][i])):
             #print(data['Cabin'][i], data['Ticket'][i], data['Fare'][i])
-    histo_data_train(data)
-    old_data = old_data.drop(['PassengerId'], axis=1)
-    data = data.drop(['PassengerId'], axis=1)
-    tmp = old_data.head(890)
+    histo_data_train(data_train)
+    tmp = old_data.head(891)
     tmp = tmp.corr()
     sns.heatmap(tmp, xticklabels=tmp.columns.values, yticklabels=tmp.columns.values)
     plt.show()
-    tmp = data.head(890)
+    tmp = data_train.head(891)
     tmp = tmp.corr()
     sns.heatmap(tmp, xticklabels=tmp.columns.values, yticklabels=tmp.columns.values)
     plt.show()
